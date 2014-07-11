@@ -10,7 +10,7 @@
 # 	Download as a CSV (like the Monuments dataset) in your current working directory
 
 
-bike = read.csv(file = "/Users/shengli/Desktop/Bike_Lanes.csv",as.is=TRUE,na.strings=" ")
+bike = read.csv(file = "/Desktop/Bike_Lanes.csv",as.is=TRUE,na.strings=" ")
 
 # 1. How many bike "lanes" are currently in Baltimore?
 nrow(bike)
