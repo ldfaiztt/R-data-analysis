@@ -7,11 +7,11 @@
 ## as a .csv file
 
 
-tax = read.csv(file = "/Users/shengli/Desktop/Real_Property_Taxes.csv",as.is=TRUE,na.strings=" ")
+tax = read.csv(file = "/Desktop/Real_Property_Taxes.csv",as.is=TRUE,na.strings=" ")
 
 # 1. Read the Property Tax data into R and call it the variable `tax`
 tax = read.csv("Real_Property_Taxes.csv", as.is=TRUE)
-tax = read.csv(file = "/Users/shengli/Desktop/Real_Property_Taxes.csv",as.is=TRUE,na.strings=" ")
+tax = read.csv(file = "/Desktop/Real_Property_Taxes.csv",as.is=TRUE,na.strings=" ")
 
 
 table(tax$resCode)
