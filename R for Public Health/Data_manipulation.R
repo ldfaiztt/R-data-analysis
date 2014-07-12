@@ -1,6 +1,5 @@
 ####################
-# Module 6 - Lab
-# 1/8/14
+# Data Manipulation
 ####################
 
 ## Part A

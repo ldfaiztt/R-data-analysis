@@ -1,7 +1,7 @@
 ########
-# Module 11
-
-## Property Tax data
+# Statistics
+# Property Tax data
+############
 
 # 1. Using your numeric lot size variable created from module 10,
 #	compute the Spearman correlation between lot size and cityTax

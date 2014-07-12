@@ -1,7 +1,7 @@
 ##############
-## Module 4: Data Input:
+## Data Input:
 ## Exploring 'Monument' Dataset
-## 1/7/2014
+##############
 
 # 1. Change the name of the "Location.1" column to "location"
 mon = read.csv("C:/Users/chisli/Desktop/Monuments.csv", header = TRUE, as.is = TRUE)

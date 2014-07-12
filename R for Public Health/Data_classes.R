@@ -1,6 +1,5 @@
 ####################
-# Module 3 - Lab Answer Key
-# 1/6/14 
+# Data Classes
 ####################
 
 ## In this lab you can use the interactive console to explore but please record your commands here.  

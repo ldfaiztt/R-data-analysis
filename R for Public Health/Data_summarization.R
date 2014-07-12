@@ -1,6 +1,5 @@
 ####################
-# Module 7 - Lab
-# 1/8/2014
+# Data Summarization
 ####################
 
 ## Part A

@@ -1,7 +1,6 @@
 ####################
-# Module - Variables
+# Variables
 ####################
-
 
 # 1. create a new variable called 'my.num' that contains 5 numbers
 my.num = c(5,4,6,8,9)
