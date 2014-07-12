@@ -1,13 +1,7 @@
 ####################
-# Module 2 - Lab
-# 1/6/14
-# Answer Key
+# Module - Variables
 ####################
 
-## In this lab you can use the interactive console to explore 
-## 	  but please record your commands here.  
-## Remember anything you type here can be "sent" to the console with 
-##    Cmd-Enter (OS-X) or Cntr-Enter (Windows/Linux).
 
 # 1. create a new variable called 'my.num' that contains 5 numbers
 my.num = c(5,4,6,8,9)
