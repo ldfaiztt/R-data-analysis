@@ -1,6 +1,6 @@
 # Script to test count.R
 
-setwd("C:/Users/turkenne.UMROOT.002/Desktop")
+setwd("/Desktop")
 source("count.R")
 
 count("other")
