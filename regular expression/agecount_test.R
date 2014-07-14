@@ -1,6 +1,6 @@
 # Script to test agecount.R
 
-setwd("C:/Users/turkenne.UMROOT.002/Desktop")
+setwd("/Desktop")
 source("agecount.R")
 
 agecount(3)
