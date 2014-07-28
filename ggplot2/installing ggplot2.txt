@@ -1,3 +1,0 @@
-i installed the ggplot2, as follows.
-1- start an R session in a terminal window (btw i am using ubuntu)
-2- once R is up and running, type in: "install.packages()" (without the quotes & do not include any package name. this will open a option to select a CRAN mirror for use. select the closest to you. a second window will open and you should be able to locate ggplot2 in the list of packages. once you highlight "ggplot2", just click ok.
