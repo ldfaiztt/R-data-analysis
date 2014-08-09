@@ -18,10 +18,12 @@ houseEnergyFeb$DateTime <- as.POSIXct(paste(houseEnergyFeb$Date, houseEnergyFeb$
 #Plot 1
 png("plot1.png", height=480, width=480)
 hist(houseEnergyFeb$Global_active_power, col = "red", xlab = "Global Active Power (kilowatts)", ylab = "Frequency", main = "Global Active Power")
+dev.off()
 
 #Plot 2
 png("plot2.png", height=480, width=480)
 plot(houseEnergyFeb$DateTime, houseEnergyFeb$Global_active_power, type = "l", xlab = "", ylab = "Global Active Power (kilowatts)")
+dev.off()
 
 # Plot 3
 png("plot3.png", height=480, width=480)
@@ -29,6 +31,7 @@ plot(houseEnergyFeb$DateTime, houseEnergyFeb$Sub_metering_1, type = "l", xlab = 
 lines(houseEnergyFeb$DateTime, houseEnergyFeb$Sub_metering_2, type = "l", col = "red")
 lines(houseEnergyFeb$DateTime, houseEnergyFeb$Sub_metering_3, type = "l", col = "blue")
 legend("topright", lty = 1, col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3" ))
+dev.off()
 
 # Plot 4
 png("plot4.png", height=480, width=480)
@@ -44,3 +47,4 @@ lines(houseEnergyFeb$DateTime, houseEnergyFeb$Sub_metering_3, col = "blue")
 legend("topright", lty = 1, bty="n", col = c("black", "red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3" ))
 #4th plot
 plot(houseEnergyFeb$DateTime, houseEnergyFeb$Global_reactive_power, type = "l", xlab = "datetime", ylab = "Global_reactive_power")
+dev.off()
