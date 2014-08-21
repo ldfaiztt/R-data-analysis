@@ -8,6 +8,7 @@ The zip file contains two files:
 2. Source Classification Code Table (Source_Classification_Code.rds): This table provides a mapping from the SCC digit strings int he Emissions table to the actual name of the PM2.5 source. The sources are categorized in a few different ways from more general to more specific.
 
 Address the following questions and make a plot for each question in the exploratory analysis:
+
 1.	Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? Make a plot using the baseplotting system to show the total PM2.5 emission from all sources for each of the years 1999, 2002, 2005, and 2008. **Output**: plot1a.png, plot1b.png
 
 2.	Have total emissions from PM2.5 decreased in the Baltimore City, Maryland (fips == "24510") from 1999 to 2008? Use the base plotting system to make a plot answering this question. **Output**: plot2a.png, plot2b.png
