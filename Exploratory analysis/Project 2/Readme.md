@@ -1,5 +1,3 @@
-Fine particulate matter (PM2.5) is an air pollutant that is harmful to human health. In the U.S., the Environmental Protection Agency sets national ambient air quality standards for PM2.5 and for tracking the emissions of this pollutant. Every 3 years, the EPA releases its database on emissions of PM2.5, known as the National Emissions Inventory (NEI). For each year and for each type of PM source, the NEI records how many tons of PM2.5 were emitted from that source over the course of the entire year.
-
 Data is available [here](https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip).
 The zip file contains two files:
 
