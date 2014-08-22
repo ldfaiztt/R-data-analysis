@@ -1,6 +1,6 @@
 Data set is available [here](https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2Factivity.zip)
 
-Instructions:
+**Instructions**:
 
 1) Load and process the data variables into a suitable format
 
