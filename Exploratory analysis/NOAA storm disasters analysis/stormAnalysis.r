@@ -10,7 +10,7 @@ stormData <- read.table("/repdata_data_StormData.csv", fill=TRUE, sep=',', heade
 # $EVTYPE Factor w/ 985 levels ie. there are 985 different events labels in stormData
 str(stormData)
 
-### Step 1: Data munging to consolidate the EVTYPE variables 
+### Step 1: Data munging to consolidate the EVTYPE variable 
 # The NOAA list 48 official storm data events (page 6) in this document
 # http://www.ncdc.noaa.gov/stormevents/pd01016005curr.pdf
 # According to NOAA website(http://www.ncdc.noaa.gov/stormevents/details.jsp):
@@ -251,7 +251,7 @@ sortStormData <- sqldf('select EVTYPE, sum(FATALITIES) fatalities, sum(INJURIES)
                 from stormDataNew
                 group by EVTYPE order by EVTYPE')
 
-#Select top 10 population harm and create a data frame for the plot  
+# Select top 10 population harm and create a data frame for the plot  
 popnHarm <- sqldf('select EVTYPE, fatalities, injuries, population_harm
                 from sortStormData
                 where population_harm > 0
