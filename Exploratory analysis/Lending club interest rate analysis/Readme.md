@@ -6,5 +6,5 @@ Identify and quantify associations between the interest rate of the loan and the
 
 Your data analysis submission will consist of the following components:
 
-1) Your main text should be written in the form of an essay with an introduction, methods, results, and conclusions section. 
-2) One figure for your data analysis uploaded as a .png, .jpg, or .pdf file, along with a figure caption of up to 500 words. 
+1. Your main text should be written in the form of an essay with an introduction, methods, results, and conclusions section. 
+2. One figure for your data analysis uploaded as a .png, .jpg, or .pdf file, along with a figure caption of up to 500 words. 
