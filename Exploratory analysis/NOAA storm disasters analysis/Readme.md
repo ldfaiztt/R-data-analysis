@@ -3,5 +3,6 @@ Data is available [here](https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2F
 The events in the database start in the year 1950 and end in November 2011. In the earlier years of the database there are generally fewer events recorded, most likely due to a lack of good records. Explore the NOAA Storm Database and answer some basic questions about severe weather events. Your analysis can consist of tables, figures, or other summaries. You may use any R package you want to support your analysis.
 
 Your data analysis must address the following questions:
+
 1. Across the United States, which types of events (as indicated in the EVTYPE variable) are most harmful with respect to population health?
 2. Across the United States, which types of events have the greatest economic consequences?
