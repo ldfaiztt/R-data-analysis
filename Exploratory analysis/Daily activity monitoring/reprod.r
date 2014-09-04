@@ -39,7 +39,9 @@ cuts2 <- data.frame(Thresholds="Median", vals = median(stepsPerDayNA$totalSteps)
 cuts <- rbind(cuts1,cuts2)
 
 png("/histogram2a.png", height=600, width=600)
-ggplot(data = stepsPerDayNA, aes(x = stepsPerDayNA$totalSteps)) + geom_histogram() + geom_vline(data=cuts, aes(xintercept=vals, linetype=Thresholds, colour = Thresholds), show_guide = TRUE) + xlab("Total number of steps") + ggtitle("Total Number of Steps Taken Per Day (include missing values)")
+ggplot(data = stepsPerDayNA, aes(x = stepsPerDayNA$totalSteps)) + geom_histogram() + 
+    geom_vline(data=cuts, aes(xintercept=vals, linetype=Thresholds, colour = Thresholds), show_guide = TRUE) + 
+    xlab("Total number of steps") + ggtitle("Total Number of Steps Taken Per Day (include missing values)")
 dev.off()
 ## 2. Report the mean and median total number of steps taken per day
 mean(stepsPerDayNA$totalSteps)
@@ -56,7 +58,9 @@ cuts2 <- data.frame(Thresholds="Median", vals = median(stepsPerDay$totalSteps, n
 cuts <- rbind(cuts1,cuts2)
 
 png("/histogram2b.png", height=600, width=600)
-ggplot(data = stepsPerDay, aes(x = stepsPerDay$totalSteps)) + geom_histogram() + geom_vline(data=cuts, aes(xintercept=vals, linetype=Thresholds, colour = Thresholds), show_guide = TRUE) + xlab("Total number of steps") + ggtitle("Total Number of Steps Taken Per Day (exclude missing values)")
+ggplot(data = stepsPerDay, aes(x = stepsPerDay$totalSteps)) + geom_histogram() + 
+    geom_vline(data=cuts, aes(xintercept=vals, linetype=Thresholds, colour = Thresholds), show_guide = TRUE) + 
+    xlab("Total number of steps") + ggtitle("Total Number of Steps Taken Per Day (exclude missing values)")
 dev.off()
 
 mean(stepsPerDay$totalSteps, na.rm=T)
@@ -90,7 +94,9 @@ median(intervalavg$avgSteps)
 #[1] 34.11321
 
 png("/timeseries3.png", height=600, width=600)
-ggplot(data=intervalavg, aes(x=intervalavg$interval, y=intervalavg$avgSteps)) + geom_line() + ggtitle("Average Daily Activity Pattern Per 5-min Interval") + xlab("Interval (24-hours)") + ylab("Average Number of Steps Taken")
+ggplot(data=intervalavg, aes(x=intervalavg$interval, y=intervalavg$avgSteps)) + geom_line() + 
+    ggtitle("Average Daily Activity Pattern Per 5-min Interval") + xlab("Interval (24-hours)") + 
+    ylab("Average Number of Steps Taken")
 dev.off()
 
 # 2. Which 5-minute interval, on average across all the days in the dataset,
@@ -144,7 +150,9 @@ cuts2 <- data.frame(Thresholds="Median", vals = median(stepsPerDayFilled$totalSt
 cuts <- rbind(cuts1,cuts2)
 
 png("/histogram4.png", height=600, width=600)
-ggplot(data = stepsPerDayFilled, aes(x = stepsPerDayFilled$totalSteps)) + geom_histogram() + geom_vline(data=cuts, aes(xintercept=vals, linetype=Thresholds, colour = Thresholds), show_guide = TRUE) + xlab("Total number of steps") + ggtitle("Total Number of Steps Taken Per Day (missing values filled)")
+ggplot(data = stepsPerDayFilled, aes(x = stepsPerDayFilled$totalSteps)) + geom_histogram() + 
+    geom_vline(data=cuts, aes(xintercept=vals, linetype=Thresholds, colour = Thresholds), show_guide = TRUE) + 
+    xlab("Total number of steps") + ggtitle("Total Number of Steps Taken Per Day (missing values filled)")
 dev.off()
 
 mean(stepsPerDayFilled$totalSteps)
@@ -175,5 +183,7 @@ dayActivity <- ddply(activityFilled, c("interval","day"), summarise, avgSteps=me
 # and the average number of steps taken, averaged across all weekday days or 
 # weekend days (y-axis).
 png("/timeseries5.png", height=600, width=600)
-ggplot(dayActivity, aes(interval, avgSteps)) + geom_line(aes(colour=day)) + facet_grid(day ~ .) + ggtitle("Average Daily Activity Per 5-Min Interval (Weekday vs Weekend)") + xlab("interval (24-hours)") + ylab("Average Number of Steps Taken")
+ggplot(dayActivity, aes(interval, avgSteps)) + geom_line(aes(colour=day)) + facet_grid(day ~ .) + 
+    ggtitle("Average Daily Activity Per 5-Min Interval (Weekday vs Weekend)") + xlab("interval (24-hours)") + 
+    ylab("Average Number of Steps Taken")
 dev.off()
