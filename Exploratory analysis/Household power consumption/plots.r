@@ -7,7 +7,8 @@
 # Name each of the plot files as plot1.png, plot2.png, etc.
 
 library(data.table)
-houseEnergy <- read.table("household_power_consumption.txt", header = TRUE, sep = ";", strip.white = TRUE, stringsAsFactors = FALSE, na.strings = "?" )
+houseEnergy <- read.table("household_power_consumption.txt", header = TRUE, sep = ";", strip.white = TRUE, 
+    stringsAsFactors = FALSE, na.strings = "?" )
 houseEnergy <- data.table(houseEnergy)
 
 houseEnergyFeb <- houseEnergy[Date %in% c("1/2/2007","2/2/2007")]
@@ -17,12 +18,14 @@ houseEnergyFeb$DateTime <- as.POSIXct(paste(houseEnergyFeb$Date, houseEnergyFeb$
 
 #Plot 1
 png("plot1.png", height=480, width=480)
-hist(houseEnergyFeb$Global_active_power, col = "red", xlab = "Global Active Power (kilowatts)", ylab = "Frequency", main = "Global Active Power")
+hist(houseEnergyFeb$Global_active_power, col = "red", xlab = "Global Active Power (kilowatts)", 
+    ylab = "Frequency", main = "Global Active Power")
 dev.off()
 
 #Plot 2
 png("plot2.png", height=480, width=480)
-plot(houseEnergyFeb$DateTime, houseEnergyFeb$Global_active_power, type = "l", xlab = "", ylab = "Global Active Power (kilowatts)")
+plot(houseEnergyFeb$DateTime, houseEnergyFeb$Global_active_power, type = "l", xlab = "", 
+    ylab = "Global Active Power (kilowatts)")
 dev.off()
 
 # Plot 3
