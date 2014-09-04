@@ -59,7 +59,8 @@ library(ggplot2)
 
 # 1. Interest Rate vs Loan Length
 png("/InterestRateLoanLength.png", height = 600, width = 600)
-ggplot(loans, aes(Loan.Length.Fac, Interest.Rate)) + geom_boxplot(aes(fill = Loan.Length.Fac)) + ggtitle("Interest Rate (%) by Loan Length (months)") + 
+ggplot(loans, aes(Loan.Length.Fac, Interest.Rate)) + geom_boxplot(aes(fill = Loan.Length.Fac)) + 
+    ggtitle("Interest Rate (%) by Loan Length (months)") + 
     ylab("Interest Rate (%)") + xlab("Loan Length (months)")
 dev.off()
 
@@ -67,14 +68,17 @@ dev.off()
 png("/InterestRateFICOScore.png", height = 600, width = 600)
 lm36 <- lm(loans$Interest.Rate[loans$Loan.Length.Fac == '36'] ~ loans$FICO.Range[loans$Loan.Length.Fac == '36'])
 lm60 <- lm(loans$Interest.Rate[loans$Loan.Length.Fac == '60'] ~ loans$FICO.Range[loans$Loan.Length.Fac == '60'])
-ggplot(loans, aes(x = FICO.Range, y = Interest.Rate, color = Loan.Length.Fac)) + geom_point() +  scale_colour_hue(l=50) + geom_smooth(method = lm, se=TRUE) +
+ggplot(loans, aes(x = FICO.Range, y = Interest.Rate, color = Loan.Length.Fac)) + geom_point() +  
+    scale_colour_hue(l=50) + geom_smooth(method = lm, se=TRUE) + 
     labs(title = "Interest Rate (%) vs FICO Score (Loan Length colored)") + ylab("Interest Rate (%)") + xlab("FICO Score")
 dev.off()
 
 # 3. Interest Rate vs Amount Funded by Investors, colored by FICO Score
 png("/InterestRateAmntFunded.png", height = 800, width = 1000)
-ggplot(loans, aes(x = Amount.Funded.By.Investors, y = Interest.Rate, color = as.factor(FICO.Range))) + geom_point() +  scale_colour_hue(l=50) +
-	labs(title = "Interest Rate (%) vs Amount Funded by Investors (FICO Score colored)") + ylab("Interest Rate (%)") + xlab("Amount Funded ($)")
+ggplot(loans, aes(x = Amount.Funded.By.Investors, y = Interest.Rate, color = as.factor(FICO.Range))) + 
+    geom_point() +  scale_colour_hue(l=50) + 
+    labs(title = "Interest Rate (%) vs Amount Funded by Investors (FICO Score colored)") + 
+    ylab("Interest Rate (%)") + xlab("Amount Funded ($)")
 dev.off()
 
 
