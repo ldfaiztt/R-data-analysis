@@ -15,7 +15,8 @@ EmissionsPM2.5 <- tapply((Emissions)/1000,year,sum)
 
 # Plot the bar chart
 png("plot1a.png", height=480, width=480)
-barplot(EmissionsPM2.5, xlab = "Year", ylab = expression("Emissions of PM"[2.5]* " (in kilotons)"), main = expression("Total emissions from PM"[2.5]* " in US (1999-2008)"), col = c("red", "blue", "grey", "orange") )
+barplot(EmissionsPM2.5, xlab = "Year", ylab = expression("Emissions of PM"[2.5]* " (in kilotons)"), 
+    main = expression("Total emissions from PM"[2.5]* " in US (1999-2008)"), col = c("red", "blue", "grey", "orange") )
 dev.off()
 
 ###### Alternative line plot #######
@@ -24,7 +25,9 @@ EmissionsPM2.5 <- aggregate(NEI[c("Emissions")]/1000, list(year = NEI$year), sum
 
 # Create the line plot
 png("plot1b.png", height = 480, width = 480)
-plot(EmissionsPM2.5$year, EmissionsPM2.5$Emissions, type="b", xlab = "Year", ylab = expression("Emissions of PM"[2.5]* " (in kilotons)"), main = expression("Total emissions from PM"[2.5]* " in US (1999-2008)"), col = "Blue")
+plot(EmissionsPM2.5$year, EmissionsPM2.5$Emissions, type="b", xlab = "Year", 
+    ylab = expression("Emissions of PM"[2.5]* " (in kilotons)"), 
+    main = expression("Total emissions from PM"[2.5]* " in US (1999-2008)"), col = "Blue")
 dev.off()
 ########################################################################################
 
@@ -42,7 +45,9 @@ BaltimorePM2.5 <- tapply((Baltimore$Emissions)/1000, Baltimore$year, sum)
 
 # Plot the bar chart
 png("plot2a.png", height = 480, width = 480)
-barplot(BaltimorePM2.5, xlab = "Year", ylab = expression("Emissions of PM"[2.5]* " (in kilotons)"), main = expression("Total emissions from PM"[2.5]* " in Baltimore City, MD (1999-2008)"), col = c("red", "blue", "grey", "orange"))
+barplot(BaltimorePM2.5, xlab = "Year", ylab = expression("Emissions of PM"[2.5]* " (in kilotons)"), 
+    main = expression("Total emissions from PM"[2.5]* " in Baltimore City, MD (1999-2008)"), 
+    col = c("red", "blue", "grey", "orange"))
 dev.off()
 
 ###### Alternative line plot #######
@@ -52,7 +57,9 @@ BaltimorePM2.5 <- aggregate(Baltimore[c("Emissions")]/1000, list(year = Baltimor
 
 # Create the line plot
 png("plot2b.png", height = 480, width = 480)
-plot(BaltimorePM2.5$year, BaltimorePM2.5$Emissions, type="b", xlab = "Year", ylab = expression("Emissions of PM"[2.5]* " (in kilotons)"), main = expression("Total emissions from PM"[2.5]* " in Baltimore City, MD (1999-2008)"), col = "Blue")
+plot(BaltimorePM2.5$year, BaltimorePM2.5$Emissions, type="b", xlab = "Year", 
+    ylab = expression("Emissions of PM"[2.5]* " (in kilotons)"), 
+    main = expression("Total emissions from PM"[2.5]* " in Baltimore City, MD (1999-2008)"), col = "Blue")
 dev.off()
 ########################################################################################
 
@@ -73,13 +80,17 @@ BaltimorePM2.5 <- aggregate(Baltimore[c("Emissions")], list(type = Baltimore$typ
 
 # Plot bar graph
 png("plot3a.png", height = 480, width = 480)
-qplot(x = year, y = Emissions, fill = type, data = BaltimorePM2.5, geom = "bar", stat = "identity", position = "dodge", xlab = "Year", ylab = expression("Emissions of PM"[2.5]* " (in tons)"), main = expression("Total emissions from PM"[2.5]* " in Baltimore City, MD (1999-2008)"))
+qplot(x = year, y = Emissions, fill = type, data = BaltimorePM2.5, geom = "bar", stat = "identity", 
+    position = "dodge", xlab = "Year", ylab = expression("Emissions of PM"[2.5]* " (in tons)"), 
+    main = expression("Total emissions from PM"[2.5]* " in Baltimore City, MD (1999-2008)"))
 dev.off()
 
 ###### Alternative line plot ######
 # Create line plot
 png("plot3b.png", height = 480, width = 480)
-qplot(year, Emissions, data = BaltimorePM2.5, color = type, geom = "path", xlab = "Year", ylab = expression("Emissions of PM"[2.5]* " (in tons)"), main = expression("Total emissions from PM"[2.5]* " in Baltimore City, MD (1999-2008)"))
+qplot(year, Emissions, data = BaltimorePM2.5, color = type, geom = "path", xlab = "Year", 
+    ylab = expression("Emissions of PM"[2.5]* " (in tons)"), 
+    main = expression("Total emissions from PM"[2.5]* " in Baltimore City, MD (1999-2008)"))
 dev.off()
 ################################################################################################
 
@@ -134,9 +145,9 @@ dev.off()
 ##### Alternative line plot #####
 png("plot5b.png", height = 480, width = 480)
 ggplot(BaltimorePM2.5, aes(x = year, y = Emissions)) + 
-  geom_line(aes(group = 1, col = Emissions)) +
-  ylab(expression("Emissions of PM"[2.5]* " (in tons)")) + xlab("Year") +
-  ggtitle("Total Emissions of Motor Vehicles in Baltimore")
+    geom_line(aes(group = 1, col = Emissions)) + 
+    ylab(expression("Emissions of PM"[2.5]* " (in tons)")) + xlab("Year") + 
+    ggtitle("Total Emissions of Motor Vehicles in Baltimore")
 dev.off()
 
 ################################################################################################
@@ -167,10 +178,10 @@ BaltLA <- rbind.data.frame (BaltimorePM2.5, LosAngPM2.5)
 
 # Plot bar chart for comparison 
 png("plot6a.png", height = 480, width = 480)
-ggplot(BaltLA, aes(year, Emissions)) + geom_bar(aes(fill = year), stat = "identity") + facet_grid(. ~ City) +
-  ggtitle("Total Emissions from motor vehicles in Baltimore and in Los Angeles") + 
-  ylab(expression("Emissions of PM"[2.5]* " (in tons)")) + xlab("Year") + 
-  geom_text(aes(label=round(Emissions), size = 2, hjust = 1, vjust = -1))
+ggplot(BaltLA, aes(year, Emissions)) + geom_bar(aes(fill = year), stat = "identity") + facet_grid(. ~ City) + 
+    ggtitle("Total Emissions from motor vehicles in Baltimore and in Los Angeles") + 
+    ylab(expression("Emissions of PM"[2.5]* " (in tons)")) + xlab("Year") + 
+    geom_text(aes(label=round(Emissions), size = 2, hjust = 1, vjust = -1))
 dev.off()
 
 ######## Alternative comparison in 3-year % change #########
@@ -187,8 +198,8 @@ percentchange$Change <- as.numeric(as.character(percentchange$Change))
 
 # Plot bar chart for percentage change comparison 
 png(filename = "plot6b.png", width = 700, height = 480)
-ggplot(percentchange, aes(Period, Change)) + geom_bar(aes(fill = City), stat = "identity") + facet_grid(. ~ City) +
-  ggtitle("% Change in Total Emissions from motor vehicles in Baltimore vs. L.A.") + 
-  ylab(expression("3 Years % Change in PM"[2.5])) + xlab("Year") + 
-  geom_text(aes(label=round(Change), size = 2, hjust = 1, vjust = -1))
+ggplot(percentchange, aes(Period, Change)) + geom_bar(aes(fill = City), stat = "identity") + facet_grid(. ~ City) + 
+    ggtitle("% Change in Total Emissions from motor vehicles in Baltimore vs. L.A.") + 
+    ylab(expression("3 Years % Change in PM"[2.5])) + xlab("Year") + 
+    geom_text(aes(label=round(Change), size = 2, hjust = 1, vjust = -1))
 dev.off()
