@@ -40,7 +40,8 @@ library(ggplot2)
 
 # Box plot to compare mpg when am is "Automatic" or "Manual"
 png("/boxplot.png", height = 600, width = 600)
-ggplot(mtcars, aes(am, mpg)) + geom_boxplot(aes(fill = am)) + ggtitle("MPG by transmission type") + ylab("Miles per gallon") + xlab("Transmission type")
+ggplot(mtcars, aes(am, mpg)) + geom_boxplot(aes(fill = am)) + ggtitle("MPG by transmission type") + 
+    ylab("Miles per gallon") + xlab("Transmission type")
 dev.off()
 
 # Pairs graph to view the relationships between every variable
@@ -169,13 +170,3 @@ png("/residuals.png", height = 800, width = 800)
 par(mfrow = c(2, 2))
 plot(model2)
 dev.off()
-
-
-
-
-
-
-
-
-
-
