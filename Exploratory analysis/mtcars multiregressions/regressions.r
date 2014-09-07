@@ -139,7 +139,7 @@ summary(model2)
 #F-statistic: 57.28 on 4 and 27 DF,  p-value: 8.424e-13
 
 
-# Adjusted r-squared = 0.8804, 88% of the variation in mpg is explained by the variables in model2
+# Adjusted r-squared = 0.879, 87.9% of the variation in mpg is explained by the variables in model2
 
 # Anova test to compare the different models
 #anova(lm(mpg ~ am, data = mtcars), lm(mpg ~ am + wt, data = mtcars), model1, model2)
