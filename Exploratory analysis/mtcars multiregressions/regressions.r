@@ -113,56 +113,57 @@ summary(model1)
 #F-statistic: 52.75 on 3 and 28 DF,  p-value: 1.21e-11
 
 # The algorithm suggest the model lm(mpg ~ wt + qsec + am, data = mtcars)
-# We add an interaction term between wt & am to the model because the pairs graph suggest that wt is correlated with transmission type
-model2 <- lm(mpg ~ wt + qsec + am + wt:am, data = mtcars)
+# We add an interaction term between wt & am and qsec & am to the model 
+model2 <- lm(mpg ~ wt:am + qsec:am, data = mtcars)
 summary(model2)
 
 #Call:
-#lm(formula = mpg ~ wt + qsec + am + wt:am, data = mtcars)
+#lm(formula = mpg ~ wt:am + qsec:am, data = mtcars)
 
 #Residuals:
 #    Min      1Q  Median      3Q     Max 
-#-3.5076 -1.3801 -0.5588  1.0630  4.3684 
-#
+#-3.9361 -1.4017 -0.1551  1.2695  3.8862 
+
 #Coefficients:
-#            Estimate Std. Error t value Pr(>|t|)    
-#(Intercept)    9.723      5.899   1.648 0.110893    
-#wt            -2.937      0.666  -4.409 0.000149 ***
-#qsec           1.017      0.252   4.035 0.000403 ***
-#amManual      14.079      3.435   4.099 0.000341 ***
-#wt:amManual   -4.141      1.197  -3.460 0.001809 ** 
+#                 Estimate Std. Error t value Pr(>|t|)    
+#(Intercept)       13.9692     5.7756   2.419  0.02259 *  
+#wt:amAutomatic    -3.1759     0.6362  -4.992 3.11e-05 ***
+#wt:amManual       -6.0992     0.9685  -6.297 9.70e-07 ***
+#amAutomatic:qsec   0.8338     0.2602   3.205  0.00346 ** 
+#amManual:qsec      1.4464     0.2692   5.373 1.12e-05 ***
 #---
 #Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-#
-#Residual standard error: 2.084 on 27 degrees of freedom
-#Multiple R-squared:  0.8959,	Adjusted R-squared:  0.8804 
-#F-statistic: 58.06 on 4 and 27 DF,  p-value: 7.168e-13
+
+#Residual standard error: 2.097 on 27 degrees of freedom
+#Multiple R-squared:  0.8946,	Adjusted R-squared:  0.879 
+#F-statistic: 57.28 on 4 and 27 DF,  p-value: 8.424e-13
+
 
 # Adjusted r-squared = 0.8804, 88% of the variation in mpg is explained by the variables in model2
 
 # Anova test to compare the different models
-anova(lm(mpg ~ am, data = mtcars), lm(mpg ~ am + wt, data = mtcars), model1, model2)
+#anova(lm(mpg ~ am, data = mtcars), lm(mpg ~ am + wt, data = mtcars), model1, model2)
 #Analysis of Variance Table
-#
+
 #Model 1: mpg ~ am
 #Model 2: mpg ~ am + wt
 #Model 3: mpg ~ wt + qsec + am
-#Model 4: mpg ~ wt + qsec + am + wt:am
+#Model 4: mpg ~ wt:am + qsec:am
 #  Res.Df    RSS Df Sum of Sq       F    Pr(>F)    
 #1     30 720.90                                   
-#2     29 278.32  1    442.58 101.892 1.161e-10 ***
-#3     28 169.29  1    109.03  25.102 2.963e-05 ***
-#4     27 117.28  1     52.01  11.974  0.001809 ** 
+#2     29 278.32  1    442.58 100.671 1.321e-10 ***
+#3     28 169.29  1    109.03  24.802 3.213e-05 ***
+#4     27 118.70  1     50.59  11.507  0.002153 ** 
 #---
 #Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 
 confint(model2)
-#                 2.5 %    97.5 %
-#(Intercept) -2.3807791 21.826884
-#wt          -4.3031019 -1.569960
-#qsec         0.4998811  1.534066
-#amManual     7.0308746 21.127981
-#wt:amManual -6.5970316 -1.685721
+#                      2.5 %    97.5 %
+#(Intercept)       2.1186308 25.819783
+#wt:amAutomatic   -4.4813221 -1.870450
+#wt:amManual      -8.0864869 -4.111900
+#amAutomatic:qsec  0.2999593  1.367612
+#amManual:qsec     0.8939972  1.998754
 
 
 ## Step 5: Residuals
