@@ -5,7 +5,7 @@
 # are most harmful with respect to population health? (Injuries + Fatalities) 
 # 2. Across the United States, which types of events have the greatest economic consequences?
 # (Property damage + Crop damage)
-stormData <- read.table("/repdata_data_StormData.csv", fill=TRUE, sep=',', header=TRUE)
+stormData <- read.table("/repdata-data-StormData.csv", fill=TRUE, sep=',', header=TRUE)
 
 # $EVTYPE Factor w/ 985 levels ie. there are 985 different events labels in stormData
 str(stormData)
@@ -246,11 +246,40 @@ library(sqldf)
 library(ggplot2)
 library(tcltk)
 
+# Check the units of Property damage and Crop damage to calculate total damage expenses
+unique(stormDataNew$PROPDMGEXP)
+#[1] K   M B 0
+#Levels:  0 B K M
+unique(stormDataNew$CROPDMGEXP)
+#[1] K   M B
+#Levels:  B K M
+
+# Replace the null, K, M, and B with numerical values for multiplication
+levels(stormDataNew$PROPDMGEXP)[levels(stormDataNew$PROPDMGEXP)==""] <- "1"
+levels(stormDataNew$PROPDMGEXP)[levels(stormDataNew$PROPDMGEXP)=="K"] <- "1000"
+levels(stormDataNew$PROPDMGEXP)[levels(stormDataNew$PROPDMGEXP)=="M"] <- "1000000"
+levels(stormDataNew$PROPDMGEXP)[levels(stormDataNew$PROPDMGEXP)=="B"] <- "1000000000"
+stormDataNew$PROPDMGEXP <- as.numeric(as.character(stormDataNew$PROPDMGEXP))
+
+levels(stormDataNew$CROPDMGEXP)[levels(stormDataNew$CROPDMGEXP)==""] <- "1"
+levels(stormDataNew$CROPDMGEXP)[levels(stormDataNew$CROPDMGEXP)=="K"] <- "1000"
+levels(stormDataNew$CROPDMGEXP)[levels(stormDataNew$CROPDMGEXP)=="M"] <- "1000000"
+levels(stormDataNew$CROPDMGEXP)[levels(stormDataNew$CROPDMGEXP)=="B"] <- "1000000000"
+stormDataNew$CROPDMGEXP <- as.numeric(as.character(stormDataNew$CROPDMGEXP))
+
+# Convert Property damage and Crop damage into their full amount
+stormDataNew$PROPDMGFULL <- stormDataNew$PROPDMG * stormDataNew$PROPDMGEXP 
+stormDataNew$CROPDMGFULL <- stormDataNew$CROPDMG * stormDataNew$CROPDMGEXP 
+
 sortStormData <- sqldf('select EVTYPE, sum(FATALITIES) fatalities, sum(INJURIES) injuries, sum(FATALITIES+INJURIES) population_harm,
-                sum(PROPDMG) property_damage, sum(CROPDMG) crops_damage, sum(PROPDMG+CROPDMG) economic_cost
+                sum(PROPDMGFULL) property_damage, sum(CROPDMGFULL) crops_damage, sum(PROPDMGFULL+CROPDMGFULL) economic_cost
                 from stormDataNew
                 group by EVTYPE order by EVTYPE')
-
+				
+sortStates <- sqldf('select STATE, sum(FATALITIES) fatalities, sum(INJURIES) injuries, sum(FATALITIES+INJURIES) population_harm
+                from stormDataNew
+                group by STATE order by STATE')
+				
 # Select top 10 population harm and create a data frame for the plot  
 popnHarm <- sqldf('select EVTYPE, fatalities, injuries, population_harm
                 from sortStormData
@@ -273,7 +302,19 @@ toleconDmg <- sqldf('select EVTYPE evtype, economic_cost, "Total" rtype from top
 toleconDmg <- rbind(toleconDmg, sqldf('select EVTYPE evtype, property_damage economic_cost, "Property Damage" rtype from topEconDmg'))
 toleconDmg <- rbind(toleconDmg, sqldf('select EVTYPE evtype, crops_damage economic_cost, "Crop Damage" rtype from topEconDmg'))
 
-### Step 3: Plot the top 10 population harm and economic cost by events
+# Select top 10 states that suffered the most population harm
+statesHarm <- sqldf('select STATE, fatalities, injuries, population_harm
+                from sortStates
+                where population_harm > 0
+                order by population_harm desc')
+
+topSTEDmg <- statesHarm[1:10,]
+tolsteDmg <- sqldf('select STATE state, population_harm, "Total" rtype from topSTEDmg')
+tolsteDmg <- rbind(tolsteDmg, sqldf('select STATE state, fatalities population_harm, "Fatality" rtype from topSTEDmg'))
+tolsteDmg <- rbind(tolsteDmg, sqldf('select STATE state, injuries population_harm, "Injury" rtype from topSTEDmg'))
+
+### Step 3: Plot the top 10 population harm and economic cost by events, 
+# and the top 10 states that suffered the most population damage
 # The 10 events which are most harmful to population health are:  
 topHumDmg
 
@@ -302,16 +343,16 @@ dev.off()
 topEconDmg
 
 #              EVTYPE property_damage crops_damage economic_cost
-#1  THUNDERSTORM WIND      2201783.27    180130.25    2381913.52
-#2        FLASH FLOOD      1247627.54    161066.71    1408694.25
-#3            TORNADO      1187838.23     90128.50    1277966.73
-#4               HAIL       575337.28    498339.12    1073676.40
-#5              FLOOD       861052.14    157701.82    1018753.96
-#6          LIGHTNING       488561.85      1903.44     490465.29
-#7          HIGH WIND       317252.06     17478.21     334730.27
-#8           WILDFIRE       122315.28      8549.23     130864.51
-#9       WINTER STORM       126900.49      1963.99     128864.48
-#10        HEAVY SNOW        91383.11      1591.70      92974.81
+#1              FLOOD    144129580200   5013161500  149142741700
+#2          HURRICANE     81718889010   5350107800   87068996810
+#3   STORM SURGE/TIDE     47834724000       855000   47835579000
+#4            TORNADO     24616905710    283425010   24900330720
+#5               HAIL     14595163420   2476029450   17071192870
+#6        FLASH FLOOD     15222268910   1334901700   16557170610
+#7            DROUGHT      1046101000  13367566000   14413667000
+#8  THUNDERSTORM WIND      7913455880   1016942600    8930398480
+#9     TROPICAL STORM      7642475550    677711000    8320186550
+#10          WILDFIRE      7760449500    402255130    8162704630
 
 png("/economiccost.png", height=700, width=1050)
 ggplot(data=toleconDmg, aes(x=evtype, y=economic_cost, fill=factor(rtype))) + 
@@ -319,5 +360,29 @@ ggplot(data=toleconDmg, aes(x=evtype, y=economic_cost, fill=factor(rtype))) +
     geom_bar(position="dodge", stat="identity") + coord_flip() +
     scale_x_discrete(limits=rev(topEconDmg$EVTYPE), name="Event") +
     scale_y_continuous(name="Total Economic Cost ($)") +
+    theme(legend.title=element_blank(), legend.position=c(.75,.7))
+dev.off()
+
+# The top 10 states that have the most injuries and fatalities are:
+topSTEDmg
+
+#   STATE fatalities injuries population_harm
+#1     TX        756     9222            9978
+#2     MO        533     5960            6493
+#3     AL        449     3707            4156
+#4     FL        544     2884            3428
+#5     CA        498     2769            3267
+#6     TN        327     2385            2712
+#7     OK        219     2375            2594
+#8     PA        492     1450            1942
+#9     IL        586     1328            1914
+#10    AR        228     1656            1884
+
+png("/statedamage.png", height=700, width=1050)
+ggplot(data=tolsteDmg, aes(x=state, y=population_harm, fill=factor(rtype))) + 
+    ggtitle('Top 10 States Suffering Population Damages from Storm Events (1996-2011)') +
+    geom_bar(position="dodge", stat="identity") + coord_flip() +
+    scale_x_discrete(limits=rev(topSTEDmg$STATE), name="STATE") +
+    scale_y_continuous(name="Total Human Damages (per person)") +
     theme(legend.title=element_blank(), legend.position=c(.75,.7))
 dev.off()
