@@ -4,7 +4,7 @@
 ##############
 
 # 1. Change the name of the "Location.1" column to "location"
-mon = read.csv("C:/Users/chisli/Desktop/Monuments.csv", header = TRUE, as.is = TRUE)
+mon = read.csv("/Desktop/Monuments.csv", header = TRUE, as.is = TRUE)
 names(mon)
 #[1] "name"            "zipCode"         "neighborhood"    "councilDistrict"
 #[5] "policeDistrict"  "Location.1" 
