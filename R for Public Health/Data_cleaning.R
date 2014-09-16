@@ -210,7 +210,7 @@ sum(is.na(tax2$sqft)) # 62!!
 #		with only agencies of those with "fire" (or any forms), if any, in the name
 
 
-Sal = read.csv(file = "/Users/shengli/Desktop/Baltimore_City_Employee_Salaries_FY2012.csv",
+Sal = read.csv(file = "/Desktop/Baltimore_City_Employee_Salaries_FY2012.csv",
                as.is=TRUE)
 Sal$AnnualSalary = as.numeric(gsub("$","",Sal$AnnualSalary,fixed=TRUE))
 Sal$GrossPay = as.numeric(gsub("$","",Sal$GrossPay, fixed=TRUE))
