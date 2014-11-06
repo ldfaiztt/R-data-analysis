@@ -211,7 +211,7 @@ ggplot(crimePerDate, aes(x = Date, y=totalCrimes)) + geom_line() +
 dev.off()
 
 
-###############################  Questions to ask: ##########################################
+###############################  Question to ask: ##########################################
 
 # Part 4) Where shouldn't you park your car?
 
@@ -332,7 +332,7 @@ unique(cartheftPerLocation$Location[cartheftPerLocation$totalTheft > 2])
 # to plot gis data,  check out http://www.r-bloggers.com/visualizing-gis-data-with-r-and-open-street-map/
 # update this section later for visualization
 
-###############################  Questions to ask: ##########################################
+###############################  Question to ask: ##########################################
 
 # Part 5) What are the safest locations in SF? 
 
@@ -392,7 +392,7 @@ crimePerAddress[which.max(crimePerAddress$totalCrime),]
 unique(crimePerAddress$Address[crimePerAddress$totalCrime == 1])
 
 
-###############################  Questions to ask: ##########################################
+###############################  Question to ask: ##########################################
 
 # Part 6) What days/times are especially dangerous?
 
@@ -450,8 +450,7 @@ ggplot(crimePerTime, aes(x = Timenum, y=totalCrimes)) + geom_line() +
 dev.off()
 
 
-###############################  Questions to ask: ##########################################
-
+###############################  Question to ask: ##########################################
 
 # Part 7) Are certain thefts more common in certain areas?
 
@@ -770,4 +769,3 @@ unique(crimeTheftPerLocation$Descript[crimeTheftPerLocation$Address == "700.0 Bl
 # 7aa. 100.0 Block of JOHNFKENNEDY DR   (37.7710282062356, -122.456866495245)
 unique(crimeTheftPerLocation$Descript[crimeTheftPerLocation$Address == "100.0 Block of JOHNFKENNEDY DR"])
 #[1] GRAND THEFT FROM LOCKED AUTO LOST PROPERTY, PETTY THEFT   PETTY THEFT OF PROPERTY      PETTY THEFT FROM LOCKED AUTO
-
