@@ -3,7 +3,7 @@
 # Data set from https://data.sfgov.org/Public-Safety/SFPD-Incidents-Previous-Three-Months/tmnf-yvry?
 
 ##Load data
-crimeData <- read.table("/Users/chisli/Desktop/SFPD_Incidents_-_Previous_Three_Months.csv", fill=TRUE, sep=',', header=TRUE)
+crimeData <- read.table("/SFPD_Incidents_-_Previous_Three_Months.csv", fill=TRUE, sep=',', header=TRUE)
 
 # Pre-transformed dataset
 str(crimeData)
