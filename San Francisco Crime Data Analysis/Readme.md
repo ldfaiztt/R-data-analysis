@@ -4,7 +4,7 @@ The updated data set is available [here](https://data.sfgov.org/Public-Safety/SF
 
 Exploratory data visualization of crime trends:
 
-1. Histogram of frequency for each crime category: **crimecatHist.png**
+1. Histogram of frequency for each crime category: ![crimecatHist.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatHist.png)
 2. Frequency of each crime category distributed by date: **crimecatDate.png**, **crimecatLowDate.png**, **crimecatMedDate.png**, **crimecatHighDate.png**
 3. Cumulative count of every crime category: **crimecatCumu.png**, **crimecatLowCumu.png**, **crimecatMedCumu.png**, **crimecatHighCumu.png**
 4. Distribution of all crimes by date: **totcrimeDate.png**
