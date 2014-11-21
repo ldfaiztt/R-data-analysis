@@ -1,6 +1,6 @@
 # Author: Chisheng Li
-# Analysis and visualization of crime data trends in San Francisco Bay Area
-# Data set from https://data.sfgov.org/Public-Safety/SFPD-Incidents-Previous-Three-Months/tmnf-yvry?
+# Analysis and visualization of crime data trends in San Francisco Bay Area between June 1st 2014 and August 31st 2014
+# Dataset from https://data.sfgov.org/Public-Safety/SFPD-Incidents-Previous-Three-Months/tmnf-yvry?
 
 ##Load data
 crimeData <- read.table("/SFPD_Incidents_-_Previous_Three_Months.csv", fill=TRUE, sep=',', header=TRUE)
@@ -36,11 +36,13 @@ unique(crimeData$IncidntNum)
 #[1] 1
 str(crimeData)
 
+
 # 1b) Transform Date
 crimeData$Date <- as.Date(crimeData$Date, format='%m/%d/%Y')
 # Check the dates
 unique(crimeData$Date)
 str(crimeData)
+
 
 # 1c) Transform Time into numeric variable Timenum
 # http://www.statmethods.net/advstats/timeseries.html
@@ -137,6 +139,7 @@ summary(otheroffense$Descript)
 #      VIOLATION OF MUNICIPAL POLICE CODE                   VIOLATION OF PARK CODE           VIOLATION OF RESTRAINING ORDER 
 #                                      52                                       17                                       25 
 
+
 # 2b) "NON-CRIMINAL" description
 nonCriminal <- subset(crimeData, crimeData$Category == "NON-CRIMINAL")
 nonCriminal <- droplevels(nonCriminal)
@@ -151,6 +154,42 @@ summary(nonCriminal$Descript)
 #                          19                         1038                            1                           37 
 #                     SHELTER              TARASOFF REPORT             TRAFFIC ACCIDENT                TURNED IN GUN 
 #                          11                           22                           12                           23 
+
+
+# 2c) Create 3 classes of crime categories based on frequency of crime incidents (low, medium, high)
+# 2ci) Create crimeLow for crimes that have total incidents < 50:
+# BAD CHECKS; BRIBERY; EMBEZZLEMENT; EXTORTION; FAMILY OFFENSES; GAMBLING; LIQUOR LAWS; LOITERING; PORNOGRAPHY/OBSCENE MAT; PROSTITUTION;
+# SEX OFFENSES, NON FORCIBLE; STOLEN PROPERTY; SUICIDE;
+crimeLow <- subset(crimeData, crimeData$Category %in% c('BAD CHECKS', 'BRIBERY', 'EMBEZZLEMENT', 'EXTORTION', 'FAMILY OFFENSES', 'GAMBLING', 
+					'LIQUOR LAWS', 'LOITERING', 'PORNOGRAPHY/OBSCENE MAT', 'PROSTITUTION', 'SEX OFFENSES, NON FORCIBLE', 'STOLEN PROPERTY',
+					'SUICIDE'))
+crimeLow <- droplevels(crimeLow)
+nrow(crimeLow)
+#[1] 154
+summary(crimeLow)
+
+
+# 2cii) Create crimeMed for crimes that have total incidents between 50 and 800:
+# ARSON; DISORDERLY CONDUCT; DRIVING UNDER THE INFLUENCE; DRUNKENNESS; FORGERY/COUNTERFEITING; FRAUD; KIDNAPPING; RUNAWAY;
+# SEX OFFENSES, FORCIBLE; SUSPICIOUS OCC; TRESPASS; WEAPON LAWS;
+crimeMed <- subset(crimeData, crimeData$Category %in% c('ARSON', 'DISORDERLY CONDUCT', 'DRIVING UNDER THE INFLUENCE', 'DRUNKENNESS', 
+					'FORGERY/COUNTERFEITING', 'FRAUD', 'KIDNAPPING', 'RUNAWAY', 'SEX OFFENSES, FORCIBLE', 'SUSPICIOUS OCC',
+					'TRESPASS', 'WEAPON LAWS'))
+crimeMed <- droplevels(crimeMed)
+nrow(crimeMed)
+#[1] 2601
+summary(crimeMed)
+
+
+# 2ciii) Create crimeHigh for crimes that have total incidents > 800:
+# ASSAULT; BURGLARY; DRUG/NARCOTIC; LARCENY/THEFT; MISSING PERSON; NON-CRIMINAL; OTHER OFFENSES; ROBBERY; VANDALISM;
+# VEHICLE THEFT; WARRANTS;
+crimeHigh <- subset(crimeData, crimeData$Category %in% c('ASSAULT', 'BURGLARY', 'DRUG/NARCOTIC', 'LARCENY/THEFT', 'MISSING PERSON',
+					'NON-CRIMINAL', 'OTHER OFFENSES', 'ROBBERY', 'VANDALISM', 'VEHICLE THEFT', 'WARRANTS'))
+crimeHigh <- droplevels(crimeHigh)
+nrow(crimeHigh)
+#[1] 28005
+summary(crimeHigh)
 
 ##################################################
 
@@ -188,6 +227,39 @@ ggplot(categoryPerDate, aes(x=Date, y=totalCategory, colour=Category)) + geom_li
 	ylab("Frequency") + xlab("Date")
 dev.off()
 
+# 3bi) Frequency of each low crime category distributed by date
+
+categorylowPerDate <- ddply(crimeLow, c('Category','Date'), summarise, totalCategory = sum(IncidntNum, na.rm=T))
+categorylowPerDate
+
+png("/crimecatLowDate.png", height=1500, width=2400)
+ggplot(categorylowPerDate, aes(x=Date, y=totalCategory, colour=Category)) + geom_line() +
+	ggtitle("Distribution of frequency of each low crime category by date") +
+	ylab("Frequency") + xlab("Date")
+dev.off()
+
+# 3bii) Frequency of each medium crime category distributed by date
+
+categorymedPerDate <- ddply(crimeMed, c('Category','Date'), summarise, totalCategory = sum(IncidntNum, na.rm=T))
+categorymedPerDate
+
+png("/crimecatMedDate.png", height=1500, width=2400)
+ggplot(categorymedPerDate, aes(x=Date, y=totalCategory, colour=Category)) + geom_line() +
+	ggtitle("Distribution of frequency of each medium crime category by date") +
+	ylab("Frequency") + xlab("Date")
+dev.off()
+
+# 3biii) Frequency of each high crime category distributed by date
+
+categoryhighPerDate <- ddply(crimeHigh, c('Category','Date'), summarise, totalCategory = sum(IncidntNum, na.rm=T))
+categoryhighPerDate
+
+png("/crimecatHighDate.png", height=1500, width=2400)
+ggplot(categoryhighPerDate, aes(x=Date, y=totalCategory, colour=Category)) + geom_line() +
+	ggtitle("Distribution of frequency of each high crime category by date") +
+	ylab("Frequency") + xlab("Date")
+dev.off()
+
 
 # 3c) Cumulative count of every crime category
 
@@ -197,6 +269,36 @@ categoryCumuDate
 png("/crimecatCumu.png", height=1500, width=2400)
 ggplot(categoryCumuDate, aes(x = Date, y = cumCrime, color = Category)) + geom_line() +
 	ggtitle("Cumulative count of each crime category") + ylab("Cumulative Count") + xlab("Date")
+dev.off()
+
+# 3ci) Cumulative count of every low crime category
+
+categorylowCumuDate <- ddply(categorylowPerDate,.(Category),transform, cumCrime = cumsum(totalCategory)) 
+categorylowCumuDate 
+
+png("/crimecatLowCumu.png", height=1500, width=2400)
+ggplot(categorylowCumuDate, aes(x = Date, y = cumCrime, color = Category)) + geom_line() +
+	ggtitle("Cumulative count of each low crime category") + ylab("Cumulative Count") + xlab("Date")
+dev.off()
+
+# 3cii) Cumulative count of every medium crime category
+
+categorymedCumuDate <- ddply(categorymedPerDate,.(Category),transform, cumCrime = cumsum(totalCategory)) 
+categorymedCumuDate 
+
+png("/crimecatMedCumu.png", height=1500, width=2400)
+ggplot(categorymedCumuDate, aes(x = Date, y = cumCrime, color = Category)) + geom_line() +
+	ggtitle("Cumulative count of each medium crime category") + ylab("Cumulative Count") + xlab("Date")
+dev.off()
+
+# 3ciii) Cumulative count of every high crime category
+
+categoryhighCumuDate <- ddply(categoryhighPerDate,.(Category),transform, cumCrime = cumsum(totalCategory)) 
+categoryhighCumuDate 
+
+png("/crimecatHighCumu.png", height=1500, width=2400)
+ggplot(categoryhighCumuDate, aes(x = Date, y = cumCrime, color = Category)) + geom_line() +
+	ggtitle("Cumulative count of each high crime category") + ylab("Cumulative Count") + xlab("Date")
 dev.off()
 
 
@@ -411,6 +513,49 @@ ggplot(categoryPerDay, aes(x=DayOfWeek, y=totalCategory, group=Category,colour=C
 	ylab("Frequency") + xlab("Day of Week")
 dev.off()
 
+# 6ai) Distribution of low crime category by Day
+categorylowPerDay <- ddply(crimeLow, c('Category','DayOfWeek'), summarise, totalCategory = sum(IncidntNum, na.rm=T))
+categorylowPerDay
+
+# Reorder the x-axis
+categorylowPerDay$DayOfWeek <- factor(categorylowPerDay$DayOfWeek, levels= c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
+categorylowPerDay <- categorylowPerDay[order(categorylowPerDay$DayOfWeek), ]
+
+png("/Users/chisli/Desktop/crimecatLowDay.png", height=1500, width=2400)
+ggplot(categorylowPerDay, aes(x=DayOfWeek, y=totalCategory, group=Category,colour=Category)) + geom_line() + geom_point() +
+	ggtitle("Distribution of frequency of each low crime category by Day of Week") +
+	ylab("Frequency") + xlab("Day of Week")
+dev.off()
+
+# 6aii) Distribution of medium crime category by Day
+categorymedPerDay <- ddply(crimeMed, c('Category','DayOfWeek'), summarise, totalCategory = sum(IncidntNum, na.rm=T))
+categorymedPerDay
+
+# Reorder the x-axis
+categorymedPerDay$DayOfWeek <- factor(categorymedPerDay$DayOfWeek, levels= c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
+categorymedPerDay <- categorymedPerDay[order(categorymedPerDay$DayOfWeek), ]
+
+png("/Users/chisli/Desktop/crimecatMedDay.png", height=1500, width=2400)
+ggplot(categorymedPerDay, aes(x=DayOfWeek, y=totalCategory, group=Category,colour=Category)) + geom_line() + geom_point() +
+	ggtitle("Distribution of frequency of each medium crime category by Day of Week") +
+	ylab("Frequency") + xlab("Day of Week")
+dev.off()
+
+# 6aiii) Distribution of high crime category by Day
+categoryhighPerDay <- ddply(crimeHigh, c('Category','DayOfWeek'), summarise, totalCategory = sum(IncidntNum, na.rm=T))
+categoryhighPerDay
+
+# Reorder the x-axis
+categoryhighPerDay$DayOfWeek <- factor(categoryhighPerDay$DayOfWeek, levels= c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"))
+categoryhighPerDay <- categoryhighPerDay[order(categoryhighPerDay$DayOfWeek), ]
+
+png("/Users/chisli/Desktop/crimecatHighDay.png", height=1500, width=2400)
+ggplot(categoryhighPerDay, aes(x=DayOfWeek, y=totalCategory, group=Category,colour=Category)) + geom_line() + geom_point() +
+	ggtitle("Distribution of frequency of each high crime category by Day of Week") +
+	ylab("Frequency") + xlab("Day of Week")
+dev.off()
+
+
 
 # 6b. Distribution of all crimes by Day instead of date
 crimePerDay <- ddply(crimeData, c('DayOfWeek'), summarise, totalCrimes = sum(IncidntNum, na.rm=T))
@@ -428,6 +573,7 @@ ggplot(crimePerDay, aes(x=DayOfWeek, y=totalCrimes)) + geom_bar(aes(fill = DayOf
 dev.off()
 
 
+
 # 6c. Distribution of each crime category by time of day
 
 categoryPerTime <- ddply(crimeData, c('Category','Timenum'), summarise, totalCategory = sum(IncidntNum, na.rm=T))
@@ -437,6 +583,34 @@ png("/crimecatTime.png", height=1500, width=2400)
 ggplot(categoryPerTime, aes(x = Timenum, y = totalCategory, color = Category)) + geom_line() +
 	ggtitle("Distribution of Crime Categories by 24hour Interval") + ylab("Crime Frequency") + xlab("Interval (24-hours)")
 dev.off()
+
+# 6ci) Distribution of each low crime category by time of day
+categorylowPerTime <- ddply(crimeLow, c('Category','Timenum'), summarise, totalCategory = sum(IncidntNum, na.rm=T))
+categorylowPerTime
+
+png("/Users/chisli/Desktop/crimecatLowTime.png", height=1500, width=2400)
+ggplot(categorylowPerTime, aes(x = Timenum, y = totalCategory, color = Category)) + geom_line() +
+	ggtitle("Distribution of Low Crime Categories by 24hour Interval") + ylab("Crime Frequency") + xlab("Interval (24-hours)")
+dev.off()
+
+# 6cii) Distribution of each medium crime category by time of day
+categorymedPerTime <- ddply(crimeMed, c('Category','Timenum'), summarise, totalCategory = sum(IncidntNum, na.rm=T))
+categorymedPerTime
+
+png("/Users/chisli/Desktop/crimecatMedTime.png", height=1500, width=2400)
+ggplot(categorymedPerTime, aes(x = Timenum, y = totalCategory, color = Category)) + geom_line() +
+	ggtitle("Distribution of Medium Crime Categories by 24hour Interval") + ylab("Crime Frequency") + xlab("Interval (24-hours)")
+dev.off()
+
+# 6ciii) Distribution of each high crime category by time of day
+categoryhighPerTime <- ddply(crimeHigh, c('Category','Timenum'), summarise, totalCategory = sum(IncidntNum, na.rm=T))
+categoryhighPerTime
+
+png("/Users/chisli/Desktop/crimecatHighTime.png", height=1500, width=2400)
+ggplot(categoryhighPerTime, aes(x = Timenum, y = totalCategory, color = Category)) + geom_line() +
+	ggtitle("Distribution of Medium Crime Categories by 24hour Interval") + ylab("Crime Frequency") + xlab("Interval (24-hours)")
+dev.off()
+
 
 
 # 6d. Distribution of all crimes by time of day
