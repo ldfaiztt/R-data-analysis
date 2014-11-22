@@ -8,3 +8,4 @@ Your data analysis submission will consist of the following components:
 
 1. Your main text should be written in the form of an essay with an introduction, methods, results, and conclusions section. 
 2. One figure for your data analysis uploaded as a .png, .jpg, or .pdf file, along with a figure caption of up to 500 words. 
+**Output**: ![InterestRateLoanLength.png](https://github.com/shngli/R-data-analysis/blob/master/Lending%20club%20interest%20rate%20analysis/InterestRateLoanLength.png), ![InterestRateFICOScore.png](https://github.com/shngli/R-data-analysis/blob/master/Lending%20club%20interest%20rate%20analysis/InterestRateFICOScore.png), ![InterestRateAmntFunded.png](https://github.com/shngli/R-data-analysis/blob/master/Lending%20club%20interest%20rate%20analysis/InterestRateAmntFunded.png), ![residualsmodel4.png](https://github.com/shngli/R-data-analysis/blob/master/Lending%20club%20interest%20rate%20analysis/residualsmodel4.png)
