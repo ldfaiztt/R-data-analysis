@@ -30,7 +30,7 @@ Exploratory data visualization of crime trends:
 2) Where are the safest locations in San Francisco?
 3) Which days and what times are especially dangerous in San Francisco? **Output**: 
 
--Distribution of all 36 crime categories by day-of-week (Monday - Sunday) ![crimecatDay.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatDay.png)
+- Distribution of all 36 crime categories by day-of-week (Monday - Sunday) ![crimecatDay.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatDay.png)
 
 - Distribution of low frequency crime categories (< 50 incidents) by day-of-week (Monday - Sunday) ![crimecatLowDay.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatLowDay.png)
 
