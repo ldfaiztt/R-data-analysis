@@ -26,7 +26,7 @@ Address the following questions and make a plot for each question in the explora
 
 4)	Across the U.S., how have emissions from coal combustion-related sources changed from 1999–2008? **Output**:
 
-- ![plot4.png](https://github.com/shngli/R-data-analysis/blob/master/EPA%20PM2.5%20emissions/plot4.png)
+![plot4.png](https://github.com/shngli/R-data-analysis/blob/master/EPA%20PM2.5%20emissions/plot4.png)
 
 5)	How have emissions from motor vehicle sources changed from 1999–2008 in Baltimore City? **Output**: 
 
