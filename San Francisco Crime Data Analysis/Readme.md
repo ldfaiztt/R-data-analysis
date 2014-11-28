@@ -4,10 +4,21 @@ The updated data set is available [here](https://data.sfgov.org/Public-Safety/SF
 
 Exploratory data visualization of crime trends:
 
-1. Histogram of frequency for each crime category: ![crimecatHist.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatHist.png)
-2. Frequency of each crime category distributed by date: ![crimecatDate.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatDate.png), ![crimecatLowDate.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatLowDate.png), ![crimecatMedDate.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatMedDate.png), ![crimecatHighDate.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatHighDate.png)
-3. Cumulative count of every crime category: ![crimecatCumu.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatCumu.png), ![crimecatLowCumu.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatLowCumu.png), ![crimecatMedCumu.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatMedCumu.png), ![crimecatHighCumu.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatHighCumu.png)
-4. Distribution of all crimes by date: ![totcrimeDate.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/totcrimeDate.png)
+1. Histogram of frequency for each SFPD crime category: ![crimecatHist.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatHist.png)
+
+2. Frequency of each crime category distributed by date:
+- Distribution of all 36 crime categories by date ![crimecatDate.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatDate.png), 
+- Distribution of low frequency crime categories (< 50 incidents) by date [crimecatLowDate.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatLowDate.png), 
+- Distribution of medium frequency crime categories (between 50 and 800 incidents) by date [crimecatMedDate.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatMedDate.png)
+- Distribution of high frequency crime categories (> 800 incidents) by date ![crimecatHighDate.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatHighDate.png)
+
+3. Cumulative count of every crime category:
+- Cumulative counts of all 36 crime categories between June 1st 2014 and August 31st 2014 ![crimecatCumu.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatCumu.png)
+- Cumulative counts of low frequency crime categories (< 50 incidents) between June 1st 2014 and August 31st 2014![crimecatLowCumu.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatLowCumu.png) 
+- Cumulative counts of medium frequency crime categories (between 50 and 800 incidents) between June 1st 2014 and August 31st 2014 ![crimecatMedCumu.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatMedCumu.png)
+- Cumulative counts of high frequency crime categories (> 800 incidents) between June 1st 2014 and August 31st 2014 ![crimecatHighCumu.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatHighCumu.png)
+
+4. Distribution of all crime incidents by date: ![totcrimeDate.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/totcrimeDate.png)
 
 **crime.r** primarily answers 4 following questions:
 
