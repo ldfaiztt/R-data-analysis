@@ -27,7 +27,9 @@ Exploratory data visualization of crime trends:
 **crime.r** primarily answers 4 following questions:
 
 1) Where in San Francisco should you not park your car?
+
 2) Where are the safest locations in San Francisco?
+
 3) Which days and what times are especially dangerous in San Francisco? **Output**: 
 
 - Distribution of all 36 crime categories by day-of-week (Monday - Sunday) ![crimecatDay.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatDay.png)
