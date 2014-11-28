@@ -40,14 +40,14 @@ Exploratory data visualization of crime trends:
 
 - Distribution of all crime incidents by day-of-week (Monday - Sunday) ![totcrimeDay.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/totcrimeDay.png)
 
--Distribution of all 36 crime categories by 24-hour time interval (00:00 - 23:59) ![crimecatTime.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatTime.png)
+- Distribution of all 36 crime categories by 24-hour time interval (00:00 - 23:59) ![crimecatTime.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatTime.png)
 
-- -Distribution of low frequency crime categories (< 50 incidents) by 24-hour time interval (00:00 - 23:59) ![crimecatLowTime.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatLowTime.png)
+- Distribution of low frequency crime categories (< 50 incidents) by 24-hour time interval (00:00 - 23:59) ![crimecatLowTime.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatLowTime.png)
  
-- -Distribution of medium frequency crime categories (between 50 and 800 incidents) by 24-hour time interval (00:00 - 23:59) ![crimecatMedTime.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatMedTime.png)
+- Distribution of medium frequency crime categories (between 50 and 800 incidents) by 24-hour time interval (00:00 - 23:59) ![crimecatMedTime.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatMedTime.png)
 
-- -Distribution of high frequency crime categories (> 800 incidents) by 24-hour time interval (00:00 - 23:59) ![crimecatHighTime.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatHighTime.png)
+- Distribution of high frequency crime categories (> 800 incidents) by 24-hour time interval (00:00 - 23:59) ![crimecatHighTime.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/crimecatHighTime.png)
  
-- -Distribution of all crime incidents by 24-hour time interval (00:00 - 23:59) ![totcrimeTime.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/totcrimeTime.png)
+- Distribution of all crime incidents by 24-hour time interval (00:00 - 23:59) ![totcrimeTime.png](https://github.com/shngli/R-data-analysis/blob/master/San%20Francisco%20Crime%20Data%20Analysis/totcrimeTime.png)
 
 4) Are certain types of theft more common in certain areas?
